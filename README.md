@@ -70,12 +70,6 @@ El sitio presenta las distintas propuestas de clases de inglés:
 
 ------------------------------------------------------------------------
 
-## 🔗 Deploy
-
-El sitio está publicado en GitHub Pages:\
-[CM Inglés -- Landing Page](https://lautarof25.github.io/CMIngles/)
-
-------------------------------------------------------------------------
 
 ## 📈 Objetivos del proyecto
 

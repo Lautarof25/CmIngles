@@ -224,6 +224,22 @@ function submitTest() {
   document.getElementById("result-level").textContent = `Tu nivel: ${level}`;
   document.getElementById("result-description").textContent = description;
   
+  // Generate WhatsApp message
+  const messages = {
+    "A1": `Hola 👋 Acabo de realizar el test de nivelación y obtuve nivel ${level}. Me gustaría conocer más sobre los cursos para principiantes.`,
+    "A2": `Hola 👋 Realicé tu test de nivelación y obtuve nivel ${level}. Estoy interesado en mejorar mi inglés con clases adaptadas a mi nivel.`,
+    "B1": `Hola 👋 Completé el test de nivelación con resultado ${level}. Busco un curso para consolidar mis conocimientos de inglés intermedio.`,
+    "B2": `Hola 👋 Acabo de hacer el test y mi nivel es ${level}. Me interesaría explorar opciones de cursos avanzados o preparación para exámenes.`,
+    "C1": `Hola 👋 Mi resultado en el test es ${level}. Me gustaría consultar sobre cursos especializados o preparación para certificaciones avanzadas.`,
+    "C2": `Hola 👋 Obtuve nivel ${level} en el test. Me interesa conocer opciones de cursos de especialización o coaching ejecutivo en inglés.`
+  };
+  
+  const whatsappMessage = messages[level];
+  const encodedMessage = encodeURIComponent(whatsappMessage);
+  const whatsappLink = `https://wa.me/5491130861066?text=${encodedMessage}`;
+  
+  document.getElementById("whatsapp-btn").href = whatsappLink;
+  
   document.getElementById("questions-form").style.display = "none";
   document.getElementById("submit-test").style.display = "none";
   document.getElementById("result-container").style.display = "block";

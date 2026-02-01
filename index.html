@@ -17,10 +17,27 @@
 
 <body>
 
+  <!-- Navigation Menu -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">CM Inglés</a>
+      <button class="nav-toggle" id="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#hero" class="nav-link">Inicio</a></li>
+        <li><a href="#clases" class="nav-link">Clases</a></li>
+        <li><a href="#test" class="nav-link">Test de Nivel</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="main-wrapper">
 
     <!-- SECTION 1: HERO (Left Yellow / Right Black) -->
-    <section class="split-section">
+    <section class="split-section" id="hero">
 
       <!-- LEFT SIDE: Visual Art (Yellow Background) -->
       <div class="col-visual theme-yellow">
@@ -64,7 +81,7 @@
     </section>
 
     <!-- SECTION 2: COURSES DETAILS (Inverted: Left Black / Right Yellow) -->
-    <section class="split-section">
+    <section class="split-section" id="clases">
 
       <!-- LEFT SIDE: Kinder, Kids, Teens (Black Background) -->
       <div class="col-text theme-black" style="padding-top: 80px;">
@@ -96,7 +113,7 @@
       <div class="col-text theme-yellow" style="padding-top: 80px;">
         <div class="memphis-shape shape-dots" style="top: 5%; right: 5%;"></div>
 
-        <h2>Cursos <span class="highlight">Avanzados</span></h2>
+        <h2>Clases <span class="highlight">Avanzados</span></h2>
 
         <div class="cards-grid">
 
@@ -121,8 +138,76 @@
 
     </section>
 
+    <!-- SECTION 3: PLACEMENT TEST -->
+    <section class="split-section test-section" id="test">
+      <div class="col-text theme-black" style="padding-top: 40px;">
+        <h2>Test de <span class="highlight">Nivelación</span></h2>
+        <p style="font-size: 1.1rem; margin-bottom: 30px; color: #ccc;">
+          Descubrí tu nivel de inglés (A1 - C2) con nuestro test interactivo
+        </p>
+
+        <div id="test-container">
+          <div id="questions-form"></div>
+          <button id="submit-test" class="btn-primary" style="margin-top: 30px; display: none;">
+            Ver Resultado
+          </button>
+        </div>
+
+        <div id="result-container" style="display: none; margin-top: 40px;">
+          <div id="result-box" style="background: rgba(255, 230, 0, 0.1); border: 3px solid var(--accent-yellow); padding: 30px; text-align: center;">
+            <h3 style="color: var(--accent-yellow); font-size: 2rem; margin-bottom: 10px;" id="result-level"></h3>
+            <p id="result-description" style="color: #ccc; margin-bottom: 20px;"></p>
+            <a class="btn-primary" href="https://wa.me/5491130861066" target="_blank">
+              Consultar Curso para mi Nivel
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
 
+  <script src="test.js"></script>
+  <script>
+    // Mobile menu toggle
+    const navToggle = document.getElementById("nav-toggle");
+    const navMenu = document.getElementById("nav-menu");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    navToggle.addEventListener("click", () => {
+      navToggle.classList.toggle("active");
+      navMenu.classList.toggle("active");
+    });
+
+    // Close menu when a link is clicked
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        navToggle.classList.remove("active");
+        navMenu.classList.remove("active");
+      });
+    });
+
+    // Update active link based on scroll position
+    window.addEventListener("scroll", () => {
+      let current = "";
+      const sections = document.querySelectorAll("section[id]");
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop - 100) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href").slice(1) === current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

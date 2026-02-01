@@ -52,7 +52,9 @@
       <ul class="nav-menu" id="nav-menu">
         <li><a href="#hero" class="nav-link">Inicio</a></li>
         <li><a href="#clases" class="nav-link">Clases</a></li>
-        <li><a href="#test" class="nav-link">Test de Nivel</a></li>
+        <li><a href="#about" class="nav-link">Nosotros</a></li>
+        <li><a href="#test" class="nav-link">Nivel</a></li>
+        <li><a href="#contact" class="nav-link">Contacto</a></li>
       </ul>
     </div>
   </nav>
@@ -69,7 +71,7 @@
         <div class="memphis-shape shape-circle-outline" style="bottom: 15%; left: 15%;"></div>
 
         <div class="hero-image-container">
-          <img src="d91d8f5b-ae53-4e12-8c25-8e5f1c92f270.jpg" alt="Clases de Inglés Online" class="hero-image">
+          <img src="logo.jpg" alt="Clases de Inglés Online" class="hero-image">
         </div>
       </div>
 
@@ -83,7 +85,8 @@
           <span class="block">Aprendé</span>
           <span class="highlight">Inglés</span>
           <span class="block"
-            style="font-size: 0.5em; margin-top: 15px; letter-spacing: 2px; font-weight: 400;">ONLINE</span>
+            style="font-size: 0.5em; margin-top: 15px; letter-spacing: 2px; font-weight: 400;">PRESENCIALES Y
+            ONLINE</span>
         </h1>
 
         <ul class="features-list">
@@ -136,7 +139,7 @@
       <div class="col-text theme-yellow" style="padding-top: 80px;">
         <div class="memphis-shape shape-dots" style="top: 5%; right: 5%;"></div>
 
-        <h2>Clases <span class="highlight">Avanzados</span></h2>
+        <h2>Clases <span class="highlight">Avanzadas</span></h2>
 
         <div class="cards-grid">
 
@@ -161,7 +164,76 @@
 
     </section>
 
-    <!-- SECTION 3: PLACEMENT TEST -->
+    <!-- SECTION 3: ABOUT (Split Layout - Inverted Colors) -->
+    <section class="split-section" id="about">
+
+      <!-- LEFT SIDE: HISTORY (Yellow Background) -->
+      <div class="col-text theme-yellow" style="padding-top: 100px; padding-bottom: 100px;">
+        <div class="memphis-shape shape-dots" style="top: 5%; right: 5%;"></div>
+        <div class="memphis-shape shape-squiggle" style="bottom: 15%; right: 10%;"></div>
+
+        <h2>Sobre <span class="highlight">CM Inglés</span></h2>
+
+        <div class="cards-grid">
+          <div class="about-card">
+            <h3>Desde 2010</h3>
+            <p>School of English nació en el año 2010,fundado por <strong>Carolina Maciel</strong>, con el objetivo de
+              brindar una enseñanza de inglés de calidad para niños y adolescentes.</p>
+          </div>
+
+          <div class="about-card">
+            <h3>Crecimiento</h3>
+            <p>Con el paso del tiempo, y gracias a la confianza de los estudiantes y sus familias, el instituto fue
+              creciendo y ampliando su propuesta. Hoy, CM Inglés ofrece clases de inglés para niños, adolescentes y
+              adultos, así como preparación para exámenes internacionales, como el First Certificate (B2), y clases de
+              conversación orientadas a mejorar la fluidez y el uso real del idioma.</p>
+          </div>
+
+          <div class="about-card">
+            <h3>Nuestro Compromiso</h3>
+            <p>Desde sus inicios, el instituto se caracteriza por un enfoque cercano, responsable y comprometido con el
+              aprendizaje de cada alumno.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE: TEAM (Black Background) -->
+      <div class="col-text theme-black" style="padding-top: 100px; padding-bottom: 100px;">
+        <div class="memphis-shape shape-cross" style="top: 5%; left: 5%;"></div>
+        <div class="memphis-shape shape-circle-outline" style="bottom: 10%; left: 10%;"></div>
+
+        <h2>Dirección y <span class="highlight">Equipo Docente</span></h2>
+
+        <div class="cards-grid">
+          <div class="about-card">
+            <h3>Nuestra Directora</h3>
+            <p><strong>Carolina Maciel</strong> es profesora universitaria de inglés y cuenta con una amplia trayectoria
+              en la enseñanza del idioma.</p>
+          </div>
+
+          <div class="about-card">
+            <p>A lo largo de su carrera, ha adquirido experiencia trabajando en escuelas privadas y de gestión estatal,
+              tanto en nivel primario como secundario, lo que le permitió desarrollar una mirada integral sobre los
+              distintos procesos de aprendizaje y las necesidades de cada etapa educativa.</p>
+          </div>
+
+          <div class="about-card">
+            <h3>Nuestra Staff</h3>
+            <p>CM Inglés cuenta además con un staff de profesoras capacitadas, que comparten los mismos valores,
+              compromiso y vocación por la enseñanza. El equipo docente se encuentra en constante formación y trabaja de
+              manera colaborativa, acompañando a cada estudiante con dedicación, respeto y entusiasmo.</p>
+          </div>
+
+          <div class="about-card">
+            <p>Creemos en la importancia de un equipo sólido, motivado y alineado con una misma filosofía: enseñar
+              inglés con calidad, cercanía y pasión.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION 4: PLACEMENT TEST -->
     <section class="split-section test-section" id="test">
       <div class="col-text theme-black" style="padding-top: 40px;">
         <h2>Test de <span class="highlight">Nivelación</span></h2>
@@ -169,14 +241,34 @@
           Descubrí tu nivel de inglés (A1 - C2) con nuestro test interactivo
         </p>
 
-        <div id="test-container">
+        <div id="test-container" style="max-width: 600px; margin: 0 auto; width: 100%;">
+          <!-- Progress Bar -->
+          <div id="test-progress-container"
+            style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); margin-bottom: 30px; border-radius: 4px; overflow: hidden;">
+            <div id="test-progress-bar"
+              style="width: 0%; height: 100%; background: var(--accent-yellow); transition: width 0.3s ease;"></div>
+          </div>
+
           <div id="questions-form"></div>
-          <button id="submit-test" class="btn-primary" style="margin-top: 30px; display: none;">
-            Ver Resultado
-          </button>
+
+          <div id="test-navigation" style="margin-top: 40px; display: flex; justify-content: space-between; gap: 20px;">
+            <button id="prev-btn" class="btn-primary"
+              style="padding: 15px 30px; font-size: 1rem; display: none; background: transparent; border-color: var(--accent-yellow); color: var(--accent-yellow);">
+              Anterior
+            </button>
+            <button id="next-btn" class="btn-primary" style="padding: 15px 30px; font-size: 1rem; flex-grow: 1;">
+              Siguiente
+            </button>
+            <button id="submit-test" class="btn-primary"
+              style="padding: 15px 30px; font-size: 1rem; display: none; flex-grow: 1;">
+              Ver Resultado
+            </button>
+          </div>
         </div>
 
-        <div id="result-container" style="display: none; margin-top: 40px;">
+        <!-- Result Container -->
+        <div id="result-container"
+          style="display: none; margin-top: 40px; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto;">
           <div id="result-box"
             style="background: rgba(255, 230, 0, 0.1); border: 3px solid var(--accent-yellow); padding: 30px; text-align: center;">
             <h3 style="color: var(--accent-yellow); font-size: 2rem; margin-bottom: 10px;" id="result-level"></h3>
@@ -185,6 +277,44 @@
               Consultar Curso para mi Nivel
             </a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: CONTACT -->
+    <section class="split-section" id="contact">
+      <div class="col-text theme-black" style="padding-top: 60px; padding-bottom: 60px;">
+        <div class="memphis-shape shape-dots" style="top: 10%; right: 10%;"></div>
+
+        <h2>¡Hablemos <span class="highlight">Hoy!</span></h2>
+        <p style="font-size: 1.2rem; margin-bottom: 40px; color: #ccc; max-width: 600px;">
+          ¿Querés más información o sumarte a nuestras clases? Escribinos y te asesoramos para encontrar el curso ideal
+          para vos.
+        </p>
+
+        <div class="cards-grid">
+          <div class="about-card" style="border-style: dashed;">
+            <h3>WhatsApp</h3>
+            <p>+54 9 11 3086-1066</p>
+            <div style="margin-top: 20px;">
+              <a class="btn-primary" href="https://wa.me/5491130861066" target="_blank"
+                style="padding: 15px 30px; font-size: 1rem;">
+                Enviar Mensaje
+              </a>
+            </div>
+          </div>
+
+          <div class="about-card" style="border-style: dashed;">
+            <h3>Ubicación</h3>
+            <p>Hurlingham, Buenos Aires (Presencial) & Online para todo el mundo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-visual theme-yellow">
+        <!-- Decoration for bottom -->
+        <div class="hero-image-container">
+          <img src="logo.jpg" alt="Contacto CM Inglés" class="hero-image">
         </div>
       </div>
     </section>

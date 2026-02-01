@@ -146,85 +146,138 @@ const levelDescriptions = {
   "C2": "Dominio pleno. Comprendes sin esfuerzo. Te expresas con precisión. Distingues matices de significado."
 };
 
-let currentScore = 0;
-let totalQuestions = 0;
+let currentQuestionIndex = 0;
+const totalQuestions = questions.length;
 
 function initTest() {
   const form = document.getElementById("questions-form");
   form.innerHTML = "";
-  
+
   questions.forEach((question, index) => {
     const questionDiv = document.createElement("div");
     questionDiv.className = "question-group";
+    questionDiv.id = `q-group-${index}`;
+    questionDiv.style.display = index === 0 ? "block" : "none";
+    questionDiv.style.opacity = index === 0 ? "1" : "0";
+    questionDiv.style.transition = "opacity 0.4s ease";
+
     questionDiv.innerHTML = `
-      <span class="question-text">${index + 1}. ${question.text}</span>
+      <span class="question-text" style="color: var(--accent-yellow); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block;">Pregunta ${index + 1} de ${totalQuestions}</span>
+      <span class="question-text" style="font-size: 1.4rem; margin-bottom: 25px;">${question.text}</span>
     `;
-    
+
     question.options.forEach((option, optionIndex) => {
       const label = document.createElement("label");
-      const input = document.createElement("input");
-      input.type = "radio";
-      input.name = `question-${index}`;
-      input.value = optionIndex;
-      input.addEventListener("change", updateButtonState);
-      
-      label.appendChild(input);
-      label.appendChild(document.createTextNode(option));
+      label.className = "option-label";
+      label.innerHTML = `
+        <input type="radio" name="question-${index}" value="${optionIndex}">
+        <span class="option-text">${option}</span>
+      `;
+
+      const input = label.querySelector('input');
+      input.addEventListener("change", () => {
+        // Auto-advance after small delay for better UX
+        setTimeout(nextQuestion, 400);
+      });
+
       questionDiv.appendChild(label);
     });
-    
+
     form.appendChild(questionDiv);
   });
-  
-  totalQuestions = questions.length;
+
+  updateNavigation();
+  updateProgressBar();
 }
 
-function updateButtonState() {
-  const form = document.getElementById("questions-form");
-  const allAnswered = questions.every((_, index) => {
-    return form.querySelector(`input[name="question-${index}"]:checked`) !== null;
+function updateProgressBar() {
+  const progressBar = document.getElementById("test-progress-bar");
+  const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+  progressBar.style.width = `${progress}%`;
+}
+
+function showQuestion(index) {
+  const groups = document.querySelectorAll(".question-group");
+  groups.forEach((group, i) => {
+    if (i === index) {
+      group.style.display = "block";
+      setTimeout(() => group.style.opacity = "1", 10);
+    } else {
+      group.style.opacity = "0";
+      group.style.display = "none";
+    }
   });
-  
+
+  currentQuestionIndex = index;
+  updateNavigation();
+  updateProgressBar();
+}
+
+function nextQuestion() {
+  if (currentQuestionIndex < totalQuestions - 1) {
+    showQuestion(currentQuestionIndex + 1);
+  } else {
+    updateNavigation(); // To show submit button if it's the last one
+  }
+}
+
+function prevQuestion() {
+  if (currentQuestionIndex > 0) {
+    showQuestion(currentQuestionIndex - 1);
+  }
+}
+
+function updateNavigation() {
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
   const submitBtn = document.getElementById("submit-test");
-  submitBtn.style.display = allAnswered ? "inline-block" : "none";
+
+  // Show/hide Prev button
+  prevBtn.style.display = currentQuestionIndex > 0 ? "inline-block" : "none";
+
+  // Is current question answered?
+  const currentAnswered = document.querySelector(`input[name="question-${currentQuestionIndex}"]:checked`) !== null;
+  const allAnswered = questions.every((_, index) => {
+    return document.querySelector(`input[name="question-${index}"]:checked`) !== null;
+  });
+
+  if (currentQuestionIndex === totalQuestions - 1) {
+    nextBtn.style.display = "none";
+    submitBtn.style.display = allAnswered ? "inline-block" : "none";
+  } else {
+    nextBtn.style.display = "inline-block";
+    submitBtn.style.display = "none";
+    nextBtn.disabled = !currentAnswered;
+    nextBtn.style.opacity = currentAnswered ? "1" : "0.5";
+  }
 }
 
 function submitTest() {
-  const form = document.getElementById("questions-form");
   let score = 0;
-  
+
   questions.forEach((question, index) => {
-    const selected = form.querySelector(`input[name="question-${index}"]:checked`);
+    const selected = document.querySelector(`input[name="question-${index}"]:checked`);
     if (selected && parseInt(selected.value) === question.correct) {
       score += question.level;
     }
   });
-  
+
   const maxScore = questions.reduce((sum, q) => sum + q.level, 0);
   const percentage = (score / maxScore) * 100;
-  
-  let level, description;
-  
-  if (percentage < 16.67) {
-    level = "A1";
-  } else if (percentage < 33.33) {
-    level = "A2";
-  } else if (percentage < 50) {
-    level = "B1";
-  } else if (percentage < 66.67) {
-    level = "B2";
-  } else if (percentage < 83.33) {
-    level = "C1";
-  } else {
-    level = "C2";
-  }
-  
-  description = levelDescriptions[level];
-  
+
+  let level;
+  if (percentage < 16.67) level = "A1";
+  else if (percentage < 33.33) level = "A2";
+  else if (percentage < 50) level = "B1";
+  else if (percentage < 66.67) level = "B2";
+  else if (percentage < 83.33) level = "C1";
+  else level = "C2";
+
+  const description = levelDescriptions[level];
+
   document.getElementById("result-level").textContent = `Tu nivel: ${level}`;
   document.getElementById("result-description").textContent = description;
-  
-  // Generate WhatsApp message
+
   const messages = {
     "A1": `Hola 👋 Acabo de realizar el test de nivelación y obtuve nivel ${level}. Me gustaría conocer más sobre los cursos para principiantes.`,
     "A2": `Hola 👋 Realicé tu test de nivelación y obtuve nivel ${level}. Estoy interesado en mejorar mi inglés con clases adaptadas a mi nivel.`,
@@ -233,24 +286,20 @@ function submitTest() {
     "C1": `Hola 👋 Mi resultado en el test es ${level}. Me gustaría consultar sobre cursos especializados o preparación para certificaciones avanzadas.`,
     "C2": `Hola 👋 Obtuve nivel ${level} en el test. Me interesa conocer opciones de cursos de especialización o coaching ejecutivo en inglés.`
   };
-  
-  const whatsappMessage = messages[level];
-  const encodedMessage = encodeURIComponent(whatsappMessage);
-  const whatsappLink = `https://wa.me/5491130861066?text=${encodedMessage}`;
-  
+
+  const whatsappLink = `https://wa.me/5491130861066?text=${encodeURIComponent(messages[level])}`;
   document.getElementById("whatsapp-btn").href = whatsappLink;
-  
-  document.getElementById("questions-form").style.display = "none";
-  document.getElementById("submit-test").style.display = "none";
+
+  document.getElementById("test-container").style.display = "none";
   document.getElementById("result-container").style.display = "block";
+
+  // Smooth scroll to result
+  document.getElementById("test").scrollIntoView({ behavior: 'smooth' });
 }
 
-// Iniciar el test cuando la página carga
 document.addEventListener("DOMContentLoaded", () => {
   initTest();
-  
+  document.getElementById("next-btn").addEventListener("click", nextQuestion);
+  document.getElementById("prev-btn").addEventListener("click", prevQuestion);
   document.getElementById("submit-test").addEventListener("click", submitTest);
-  
-  // Agregar event listener para mostrar botón cuando haya respuestas
-  setTimeout(updateButtonState, 100);
 });

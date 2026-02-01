@@ -1,0 +1,377 @@
+/* Modern Memphis - Split Screen (Black & Yellow) */
+:root {
+  --bg-dark: #121212;
+  --bg-yellow: #FFE600;
+
+  --text-on-dark: #ffffff;
+  --text-on-yellow: #000000;
+
+  --accent-yellow: #FFE600;
+  --accent-dark: #000000;
+
+  --font-main: 'Outfit', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  /* Allow scrolling */
+  height: auto;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+  overflow-x: hidden;
+}
+
+/* Layout - Sections */
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.split-section {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  /* Mobile first: Stacked */
+  min-height: 100vh;
+}
+
+/* Desktop Split */
+@media (min-width: 900px) {
+  .split-section {
+    flex-direction: row;
+  }
+}
+
+/* =========================================
+   COLUMN STYLES
+   ========================================= */
+
+/* Generic Column Foundation */
+.col-visual,
+.col-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Default center, flexible */
+  position: relative;
+  overflow: hidden;
+  padding: 40px;
+}
+
+.col-text {
+  align-items: flex-start;
+  /* Text usually left aligned */
+  padding: 60px;
+}
+
+
+/* THEME: YELLOW BACKGROUND */
+.theme-yellow {
+  background-color: var(--bg-yellow);
+  color: var(--text-on-yellow);
+  /* Pattern */
+  background-image: radial-gradient(#000 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* THEME: BLACK BACKGROUND */
+.theme-black {
+  background-color: var(--bg-dark);
+  /* or #121212 */
+  color: var(--text-on-dark);
+}
+
+
+/* =========================================
+   SPECIFIC ELEMENT STYLES
+   ========================================= */
+
+/* Hero Image */
+.hero-image-container {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border: 4px solid #000;
+  box-shadow: 20px 20px 0px #000;
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+  background-color: #fff;
+}
+
+.hero-image:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+
+/* Typography */
+h1 {
+  font-size: 4.5rem;
+  line-height: 0.95;
+  margin-bottom: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: inherit;
+  /* Adapt to theme */
+}
+
+h2 {
+  font-size: 3rem;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* Highlights */
+.highlight {
+  color: #000;
+  background-color: var(--accent-yellow);
+  padding: 0 15px;
+  display: inline-block;
+  transform: rotate(-1deg);
+  margin-left: 10px;
+}
+
+/* When on black bg */
+.theme-black .highlight {
+  box-shadow: 6px 6px 0px #fff;
+}
+
+/* When on yellow bg */
+.theme-yellow .highlight {
+  background-color: #000;
+  color: #fff;
+  /* or yellow? */
+  color: var(--accent-yellow);
+  box-shadow: 6px 6px 0px #000;
+}
+
+.block {
+  display: block;
+}
+
+
+/* Feature List (Hero) */
+.features-list {
+  list-style: none;
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.features-list li {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #eee;
+}
+
+.features-list li::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent-yellow);
+  margin-right: 20px;
+  border: 1px solid #000;
+  box-shadow: 2px 2px 0px #fff;
+}
+
+
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  width: 100%;
+}
+
+.course-card {
+  border: 3px solid;
+  padding: 25px;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.course-card:hover {
+  transform: translate(-3px, -3px);
+}
+
+/* Card Styling based on Theme */
+.theme-black .course-card {
+  border-color: var(--accent-yellow);
+  background: rgba(255, 230, 0, 0.05);
+  box-shadow: 8px 8px 0px #fff;
+}
+
+.theme-black .course-card h3 {
+  color: var(--accent-yellow);
+}
+
+.theme-yellow .course-card {
+  border-color: #000;
+  background: #fff;
+  box-shadow: 8px 8px 0px #000;
+}
+
+.theme-yellow .course-card h3 {
+  color: #000;
+}
+
+.course-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.course-card p {
+  font-size: 1rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+
+/* Buttons */
+.btn-primary {
+  position: relative;
+  display: inline-block;
+  padding: 20px 50px;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #000;
+  background-color: var(--accent-yellow);
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 2px solid #fff;
+  box-shadow: 6px 6px 0px #fff;
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0px #fff;
+}
+
+.btn-primary:active {
+  transform: translate(4px, 4px);
+  box-shadow: 2px 2px 0px #fff;
+}
+
+
+/* Shapes */
+.memphis-shape {
+  position: absolute;
+  pointer-events: none;
+}
+
+.shape-cross {
+  font-size: 80px;
+  color: transparent;
+  font-family: sans-serif;
+  font-weight: 900;
+  opacity: 0.2;
+}
+
+.shape-cross::after {
+  content: '+';
+}
+
+.theme-yellow .shape-cross {
+  -webkit-text-stroke: 4px #000;
+}
+
+.theme-black .shape-cross {
+  -webkit-text-stroke: 4px #fff;
+}
+
+.shape-dots {
+  width: 150px;
+  height: 150px;
+  background-size: 15px 15px;
+  opacity: 0.3;
+}
+
+.theme-black .shape-dots {
+  background-image: radial-gradient(var(--accent-yellow) 20%, transparent 20%);
+}
+
+.theme-yellow .shape-dots {
+  background-image: radial-gradient(#000 20%, transparent 20%);
+}
+
+.shape-squiggle {
+  width: 100px;
+  height: 20px;
+  background-size: 20px 20px;
+  transform: rotate(45deg);
+}
+
+.theme-black .shape-squiggle {
+  background: linear-gradient(135deg, transparent, transparent 45%, var(--accent-yellow) 45%, var(--accent-yellow) 55%, transparent 55%, transparent),
+    linear-gradient(45deg, transparent, transparent 45%, var(--accent-yellow) 45%, var(--accent-yellow) 55%, transparent 55%, transparent);
+}
+
+.theme-yellow .shape-squiggle {
+  background: linear-gradient(135deg, transparent, transparent 45%, #000 45%, #000 55%, transparent 55%, transparent),
+    linear-gradient(45deg, transparent, transparent 45%, #000 45%, #000 55%, transparent 55%, transparent);
+}
+
+.shape-circle-outline {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  z-index: 2;
+  opacity: 0.1;
+}
+
+.theme-yellow .shape-circle-outline {
+  border: 6px solid #000;
+}
+
+.theme-black .shape-circle-outline {
+  border: 6px solid #fff;
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  .col-visual,
+  .col-text {
+    padding: 60px 20px;
+    flex: auto;
+    /* Allow growth */
+  }
+}
